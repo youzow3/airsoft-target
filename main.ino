@@ -1,17 +1,15 @@
 #include "target.h"
+#include "ui.h"
 #include "config.h"
-
-LEDBuffer g_led_buffer(LED_BUFFER_SIZE);
-Target targets[] = {Target(4, 3)};
-Game *game;
+#include "timeattack.h"
 
 void setup() {
   Serial.begin(9600);
-  game = new GameTimeattack(targets, sizeof(targets) / sizeof(targets[0]), 20);
+  timeattack_setup();
 }
 
 void loop() {
-  game->update();
-  g_led_buffer.update();
+  timeattack_update();
+  led_buffer_update();
   delay(10);
 }
