@@ -7,6 +7,8 @@
 static size_t targets_[TIMEATTACK_N_TARGETS];
 static size_t step_;
 static bool stepped_;
+static unsigned long start_time_;
+static bool result_;
 
 void timeattack_setup()
 {
@@ -14,6 +16,8 @@ void timeattack_setup()
     targets_[i] = random(0, NTARGETS);
   step_ = 0;
   stepped_ = true;
+  start_time_ = millis();
+  result_ = false;
 }
 
 void timeattack_update()
@@ -38,7 +42,14 @@ void timeattack_update()
   }
 
   if (step_ == TIMEATTACK_N_TARGETS)
-    return;
+  {
+    if (result_)
+      return;
+    Serial.print("Finish: ");
+    Serial.print(millis() - start_time_);
+    Serial.print(" milliseconds");
+    result_ = true;
+  }
 
   if (!TARGETS[targets_[step_]].update())
     return false;
