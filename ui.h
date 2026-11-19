@@ -6,5 +6,5 @@ struct LED {
   unsigned long timing; // Absolute timing in milliseconds.
 };
 
-void led_buffer_add(struct LED led);
+void led_buffer_add(struct LED ation);
 void led_buffer_update();

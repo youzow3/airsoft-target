@@ -4,13 +4,15 @@
 #include "config.h"
 #include "target.h"
 
+namespace TimeAttack
+{
 static size_t targets_[TIMEATTACK_N_TARGETS];
 static size_t step_;
 static bool stepped_;
 static unsigned long start_time_;
 static bool result_;
 
-void timeattack_setup()
+void setup()
 {
   for (size_t i = 0; i < TIMEATTACK_N_TARGETS; i++)
     targets_[i] = random(0, NTARGETS);
@@ -20,7 +22,7 @@ void timeattack_setup()
   result_ = false;
 }
 
-void timeattack_update()
+void update()
 {
   if (stepped_)
   {
@@ -49,12 +51,13 @@ void timeattack_update()
     Serial.print(millis() - start_time_);
     Serial.print(" milliseconds");
     result_ = true;
+    return;
   }
 
   if (!TARGETS[targets_[step_]].update())
-    return false;
+    return;
   
   step_++;
   stepped_ = true;
-  return true;
+}
 }

@@ -13,6 +13,7 @@ void led_buffer_add(struct LED action) {
       buffer_[--start_] = action;
     else {
       // Must not be happened
+      Serial.println("led_buffer_add: Not enough buffer size.");
       return;
     }
   }
