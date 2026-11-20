@@ -9,7 +9,7 @@
 #define TIMEATTACK_N_TARGETS 20
 #define SCOREATTACK_DURATION 30000
 
-#define GAME_NAMESPACE TimeAttack
+#define GAME_NAMESPACE ScoreAttack
 #define GAME_SETUP GAME_NAMESPACE::setup
 #define GAME_UPDATE GAME_NAMESPACE::update
 

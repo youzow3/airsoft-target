@@ -3,7 +3,7 @@
 
 Target::Target(uint8_t led, uint8_t sensor) : led_(led), sensor_(sensor), last_fired_(0) {
   pinMode(led_, OUTPUT);
-  pinMode(sensor_, INPUT);
+  pinMode(sensor_, INPUT_PULLUP);
 }
 
 bool Target::update() {
