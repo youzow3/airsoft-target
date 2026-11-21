@@ -17,6 +17,8 @@ void setup()
   stepped_ = false;
   target_ = random(0, NTARGETS);
   result_ = false;
+  Serial.print("1st target: ");
+  Serial.println(target_);
 }
 
 void update()
@@ -24,7 +26,10 @@ void update()
   unsigned long time = millis();
 
   if (stepped_) {
+    Serial.println("Handling LED emition");
     if (step_ > 0) {
+      Serial.print("LOWing last target: ");
+      Serial.println(last_target_);
       uint8_t led = TARGETS[last_target_].led();
       led_buffer_add({led, LOW, time});
       led_buffer_add({led, HIGH, time + 200});
@@ -33,6 +38,8 @@ void update()
       led_buffer_add({led, LOW, time + 800});
     }
 
+    Serial.print("HIGHing next target");
+    Serial.println(target_);
     led_buffer_add({TARGETS[target_].led(), HIGH, time});
     stepped_ = false;
   }
@@ -55,6 +62,9 @@ void update()
   step_++;
   stepped_ = true;
   last_target_ = target_;
-  target_ = random(0, NTARGETS);
+  while (last_target_ == target_)
+    target_ = random(0, NTARGETS);
+  Serial.print("Next target: ");
+  Serial.println(target_);
 }
 }

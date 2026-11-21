@@ -16,6 +16,7 @@ void setup() {
   {
     for (int j = 0; j < NTARGETS; j++)
       digitalWrite(TARGETS[j].led(), HIGH);
+
     delay(250);
     for (int j = 0; j < NTARGETS; j++)
       digitalWrite(TARGETS[j].led(), LOW);
@@ -34,7 +35,9 @@ void setup() {
   else
     Serial.println("CHECKING SENSOR FAILED");
 
+  Serial.println("SETUP GAME");
   GAME_SETUP();
+  Serial.println("SETUPPED GAME");
 }
 
 void loop() {
